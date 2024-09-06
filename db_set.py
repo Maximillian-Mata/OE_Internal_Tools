@@ -143,26 +143,3 @@ def Delete_User(username):
     connection.commit()
     connection.close()
     return 
-# My Usage
-'''
-Init_DB()
-Insert_User("Maximillian Mata", "oe_matam1", "MyMast252131")
-
-
-Init_approved()
-
-Add_Approved("oe_zangl")
-Add_Approved("oe_TestUser")
-Add_Approved("Ismael")
-Add_Approved("oe_murphy11")
-Add_Approved("oe_gatesg2")
-
-#print(Check_Approved("oe_TestUser"))
-
-
-
-Users = Fetch_ALL()
-for x in Users:
-    print(x)
-'''
-View_Approved()

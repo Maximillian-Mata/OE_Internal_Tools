@@ -1,0 +1,6 @@
+streamlit
+ffmpeg-python
+python-pptx
+pytubefix 
+youtube_transcript_api 
+cryptography

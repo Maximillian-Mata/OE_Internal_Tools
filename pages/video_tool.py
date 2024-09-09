@@ -161,7 +161,7 @@ def download_youtube_video(video_url, capt):
 def download_youtube_playlist(video_url, capt):
     try:
         # Create Playlist Object
-        pl = Playlist(video_url, proxies=proxies)
+        pl = Playlist(video_url, proxies=proxies, use_oauth=True)
         zip_buffer = BytesIO()
         st.write(f"Got the playlist: {pl.title}")
         if capt:
@@ -171,7 +171,7 @@ def download_youtube_playlist(video_url, capt):
                 with st.spinner("Getting Playlist"):
                     st.write(f"Working on video {index+1}")
                     # Create Youtube Object
-                    yt = YouTube(video_url, proxies=proxies)
+                    yt = YouTube(video_url, proxies=proxies, use_oauth=True)
                     st.write(f"Got the video: {yt.title}")
                     # Get highest Resolution streams
                     audio = yt.streams.filter(only_audio=True).first()

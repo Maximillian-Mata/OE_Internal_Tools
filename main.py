@@ -50,7 +50,7 @@ def check_password():
             st.error("Invalid entries")
         else:
             Insert_User(Name, Username, pwd)
-            st.info(f"Welcome {Name}")
+            st.info(f"Welcome {Name}. Please refresh the page and login to begin using the tools")
         return
 
     def password_entered():

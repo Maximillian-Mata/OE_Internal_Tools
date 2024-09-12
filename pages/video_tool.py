@@ -92,7 +92,7 @@ def add_to_dict_srt(file_name):
 def download_youtube_video(video_url, capt):
     try:
         # Create Youtube Object
-        yt = YouTube(video_url, proxies=proxies, allow_oauth_cache=True)
+        yt = YouTube(video_url, allow_oauth_cache=True)
         st.write(f"Got the video: {yt.title}")
         # Get highest Resolution streams
         audio = yt.streams.filter(only_audio=True).first()

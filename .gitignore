@@ -13,3 +13,4 @@ pip-selfcheck.json
 Testing.py
 .streamlit/secrets.toml
 OtherDB.py
+__pycache__

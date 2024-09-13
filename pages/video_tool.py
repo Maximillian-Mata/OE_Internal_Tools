@@ -28,7 +28,8 @@ st.title('OE Video Tool')
 # Your script logic here
 
 # Global Variables
-
+vd = st.secrets.visitorData
+po = st.secrets.poToken
 
 Audio_Path = "./Downloaded_Audio"
 Video_Path = "./Downloaded_Video"
@@ -92,7 +93,7 @@ def add_to_dict_srt(file_name):
 def download_youtube_video(video_url, capt):
     try:
         # Create Youtube Object
-        yt = YouTube(video_url, allow_oauth_cache=True)
+        yt = YouTube(video_url, proxies=proxies, use_po_token=True, po_token_verifier=(vd, po))
         st.write(f"Got the video: {yt.title}")
         # Get highest Resolution streams
         audio = yt.streams.filter(only_audio=True).first()

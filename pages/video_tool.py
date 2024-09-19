@@ -44,7 +44,7 @@ def clean(title):
     return cleaned_string
 
 def get_captions(video_url):
-    yt = YouTube(video_url,proxies=proxies)
+    yt = YouTube(video_url)
     try:
         got = YouTubeTranscriptApi.get_transcript(yt.video_id, languages=['en'])
         #st.write("Got the captions!")
@@ -60,7 +60,7 @@ def get_captions(video_url):
         st.write("No English captions available")
 
 def get_ITAG(url):
-    yt = YouTube(url, proxies=proxies)
+    yt = YouTube(url)
     top_itag = yt.streams.order_by("resolution").last().itag
     return(top_itag)
 
@@ -68,7 +68,7 @@ def get_ITAG(url):
 def is_playlist(url):
     try:
         # Attempt to create a Playlist object
-        playlist = Playlist(url, proxies=proxies)
+        playlist = Playlist(url)
         # Check if the playlist object has videos
         if len(playlist.video_urls) > 0:
             return True
@@ -93,7 +93,7 @@ def add_to_dict_srt(file_name):
 def download_youtube_video(video_url, capt):
     try:
         # Create Youtube Object
-        yt = YouTube(video_url, proxies=proxies, use_po_token=True, token_file="Mytokens.txt")
+        yt = YouTube(video_url,use_po_token=True, token_file="Mytokens.txt")
         st.write(f"Got the video: {yt.title}")
         # Get highest Resolution streams
         audio = yt.streams.filter(only_audio=True).first()
@@ -156,7 +156,7 @@ def download_youtube_video(video_url, capt):
 def download_youtube_playlist(video_url, capt):
     try:
         # Create Playlist Object
-        pl = Playlist(video_url, proxies=proxies)
+        pl = Playlist(video_url,use_po_token=True, token_file="Mytokens.txt")
         zip_buffer = BytesIO()
         st.write(f"Got the playlist: {pl.title}")
         if capt:
@@ -166,7 +166,7 @@ def download_youtube_playlist(video_url, capt):
                 with st.spinner("Getting Playlist"):
                     st.write(f"Working on video {index+1}")
                     # Create Youtube Object
-                    yt = YouTube(video_url, proxies=proxies)
+                    yt = YouTube(video_url,use_po_token=True, token_file="Mytokens.txt")
                     st.write(f"Got the video: {yt.title}")
                     # Get highest Resolution streams
                     audio = yt.streams.filter(only_audio=True).first()

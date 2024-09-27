@@ -13,9 +13,10 @@ pip-selfcheck.json
 Testing.py
 .streamlit/secrets.toml
 OtherDB.py
-__pycache__
+__pycache__/
 *.pyc
 __pycache__/db_set.cpython-312.pyc
 __pycache__/nav.cpython-312.pyc
 *.mp4
 .devcontainer
+node_modules/

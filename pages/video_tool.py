@@ -9,7 +9,8 @@ from youtube_transcript_api import YouTubeTranscriptApi # type: ignore
 from youtube_transcript_api.formatters import SRTFormatter # type: ignore
 #Free IP Proxies
 from proxies import proxies
-
+# potoken gather
+import subprocess
 
 
 
@@ -235,10 +236,15 @@ def main():
         #    chosen_index = st.secrets["Pws"].index(entered_password)
         #    user_name = st.secrets["Approved_users"][chosen_index]
         #    st.write(f"Welcome {user_name}")
+    st.write("If the download triggers a bot warning try generating a new po token using the button below and trying again.")
+    get_token = st.button(label="Get PoToken")
+    if get_token:
+        subprocess.run(['node', "potokens.js"], capture_output=True, text=True)
     with st.form("Input Form"):
         want_capt = st.toggle(label="Generate Captions?")
         #entered_password = st.text_input(label = "Password:", value="", type="password")
         url = st.text_input(label="URL input", value="")
+        
         submitted = st.form_submit_button("Submit")
     if(submitted):
         #if (entered_password == st.secrets["Master_Password"] or entered_password in st.secrets["Pws"]):
@@ -246,6 +252,8 @@ def main():
                 #chosen_index = st.secrets["Pws"].index(entered_password)
                 #user_name = st.secrets["Approved_users"][chosen_index]
                 #st.write(f"Welcome {user_name}")
+       
+
         try:
             if is_playlist(url):
                 st.write("This is a playlist")

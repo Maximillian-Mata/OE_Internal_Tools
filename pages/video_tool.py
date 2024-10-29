@@ -94,7 +94,7 @@ def add_to_dict_srt(file_name):
 def download_youtube_video(video_url, capt):
     try:
         # Create Youtube Object
-        yt = YouTube(video_url,use_po_token=True, token_file="Mytokens.txt")
+        yt = YouTube(video_url, use_oauth=True, allow_oauth_cache=True, token_file="Mytokens.txt")
         st.write(f"Got the video: {yt.title}")
         # Get highest Resolution streams
         audio = yt.streams.filter(only_audio=True).first()
@@ -110,7 +110,7 @@ def download_youtube_video(video_url, capt):
         # Label the components
         ext = stream.mime_type.replace("video/",'.')
         video_title = 'Downloaded_Video/'+clean(stream.title)+ext
-        audio_title = 'Downloaded_Audio/'+clean(audio.title)+'.mp4'
+        audio_title = 'Downloaded_Audio/'+clean(audio.title)+'.m4a'
         Video_Stream = ffmpeg.input(video_title)
         Audio_Stream = ffmpeg.input(audio_title)
         # Combine High Quality Audio and Video
@@ -167,7 +167,7 @@ def download_youtube_playlist(video_url, capt):
                 with st.spinner("Getting Playlist"):
                     st.write(f"Working on video {index+1}")
                     # Create Youtube Object
-                    yt = YouTube(video_url,use_po_token=True, token_file="Mytokens.txt")
+                    yt = YouTube(video_url, token_file="Mytokens.txt", use_oauth=True)
                     st.write(f"Got the video: {yt.title}")
                     # Get highest Resolution streams
                     audio = yt.streams.filter(only_audio=True).first()
@@ -183,7 +183,7 @@ def download_youtube_playlist(video_url, capt):
                     # Label the components
                     ext = stream.mime_type.replace("video/",'.')
                     video_title = 'Downloaded_Video/'+clean(stream.title)+ext
-                    audio_title = 'Downloaded_Audio/'+clean(audio.title)+'.mp4'
+                    audio_title = 'Downloaded_Audio/'+clean(audio.title)+'.m4a'
                     Video_Stream = ffmpeg.input(video_title)
                     Audio_Stream = ffmpeg.input(audio_title)
                     # Combine High Quality Audio and Video
@@ -236,14 +236,14 @@ def main():
         #    chosen_index = st.secrets["Pws"].index(entered_password)
         #    user_name = st.secrets["Approved_users"][chosen_index]
         #    st.write(f"Welcome {user_name}")
-    st.write("If the download triggers a bot warning try generating a new po token using the button below and trying again.")
-    get_token = st.button(label="Get PoToken")
-    if get_token:
-        subprocess.run(['node', "potokens.js"], capture_output=True, text=True)
+    #st.write("If the download triggers a bot warning try generating a new po token using the button below and trying again.")
+    #get_token = st.button(label="Get PoToken")
+    #if get_token:
+    #    subprocess.run(['node', "potokens.js"], capture_output=True, text=True)
     with st.form("Input Form"):
         want_capt = st.toggle(label="Generate Captions?")
         #entered_password = st.text_input(label = "Password:", value="", type="password")
-        url = st.text_input(label="URL input", value="")
+        url = str(st.text_input(label="URL input", value=""))
         
         submitted = st.form_submit_button("Submit")
     if(submitted):

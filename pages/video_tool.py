@@ -94,7 +94,7 @@ def add_to_dict_srt(file_name):
 def download_youtube_video(video_url, capt):
     try:
         # Create Youtube Object
-        yt = YouTube(video_url, use_oauth=True, allow_oauth_cache=True, token_file="Mytokens.txt")
+        yt = YouTube(video_url, use_oauth=True, allow_oauth_cache=True, token_file="Mytokens.txt", use_po_token=True)
         st.write(f"Got the video: {yt.title}")
         # Get highest Resolution streams
         audio = yt.streams.filter(only_audio=True).first()
@@ -157,7 +157,7 @@ def download_youtube_video(video_url, capt):
 def download_youtube_playlist(video_url, capt):
     try:
         # Create Playlist Object
-        pl = Playlist(video_url,use_po_token=True, token_file="Mytokens.txt")
+        pl = Playlist(video_url,use_po_token=True, token_file="Mytokens.txt", use_oauth=True, allow_oauth_cache=True)
         zip_buffer = BytesIO()
         st.write(f"Got the playlist: {pl.title}")
         if capt:
